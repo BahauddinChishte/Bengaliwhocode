@@ -1,0 +1,134 @@
+---
+import EditorToolbar from './EditorToolbar.astro';
+import OutputPanel from './OutputPanel.astro';
+import type { SupportedLanguage } from './languages';
+
+interface Props {
+  defaultLanguage?: SupportedLanguage;
+}
+
+const { defaultLanguage = 'javascript' } = Astro.props;
+---
+
+<div class="code-editor-container h-[600px] bg-[#1e1e1e] rounded-lg overflow-hidden shadow-xl">
+  <div class="flex h-full">
+    <div class="w-1/2 border-r border-gray-700">
+      <EditorToolbar />
+      <div id="editor" class="h-[calc(100%-44px)]"></div>
+    </div>
+    <OutputPanel />
+  </div>
+</div>
+
+<script>
+  import { EditorView } from 'codemirror';
+  import { createEditorState, getCurrentLanguage } from './EditorState';
+  import { runCode } from './Runner';
+  import { languages, defaultCodes } from './languages';
+
+  let editor: EditorView;
+
+  async function initializeEditor() {
+    const currentLanguage = getCurrentLanguage();
+    const state = await createEditorState(currentLanguage);
+    
+    editor = new EditorView({
+      state,
+      parent: document.getElementById('editor')
+    });
+
+    setupEventListeners(currentLanguage);
+    updateOutputView(currentLanguage);
+  }
+
+  function setupEventListeners(initialLanguage: string) {
+    const languageSelector = document.getElementById('language-selector');
+    if (languageSelector) {
+      languageSelector.value = initialLanguage;
+      languageSelector.addEventListener('change', handleLanguageChange);
+    }
+
+    document.getElementById('run-code')?.addEventListener('click', handleRunCode);
+    document.getElementById('reset-code')?.addEventListener('click', handleResetCode);
+    document.getElementById('clear-output')?.addEventListener('click', handleClearOutput);
+  }
+
+  async function handleLanguageChange(e: Event) {
+    const select = e.target as HTMLSelectElement;
+    const newLanguage = select.value;
+    const state = await createEditorState(newLanguage);
+    
+    editor.setState(state);
+    updateOutputView(newLanguage);
+  }
+
+  async function handleRunCode() {
+    const code = editor.state.doc.toString();
+    const language = (document.getElementById('language-selector') as HTMLSelectElement).value;
+    const result = await runCode(code, language);
+    
+    if (['html', 'css'].includes(language)) {
+      updatePreview(result);
+    } else {
+      updateConsoleOutput(result);
+    }
+  }
+
+  function handleResetCode() {
+    const language = (document.getElementById('language-selector') as HTMLSelectElement).value;
+    editor.dispatch({
+      changes: {
+        from: 0,
+        to: editor.state.doc.length,
+        insert: defaultCodes[language]
+      }
+    });
+  }
+
+  function handleClearOutput() {
+    const outputFrame = document.getElementById('preview-frame') as HTMLIFrameElement;
+    const consoleOutput = document.getElementById('console-output');
+    
+    if (outputFrame) outputFrame.srcdoc = '';
+    if (consoleOutput) consoleOutput.textContent = '';
+  }
+
+  function updateOutputView(language: string) {
+    const previewFrame = document.getElementById('preview-frame');
+    const consoleOutput = document.getElementById('console-output');
+    
+    if (previewFrame && consoleOutput) {
+      if (['html', 'css'].includes(language)) {
+        previewFrame.classList.remove('hidden');
+        consoleOutput.classList.add('hidden');
+      } else {
+        previewFrame.classList.add('hidden');
+        consoleOutput.classList.remove('hidden');
+      }
+    }
+  }
+
+  function updatePreview(code: string) {
+    const frame = document.getElementById('preview-frame') as HTMLIFrameElement;
+    if (frame) {
+      const doc = frame.contentDocument;
+      doc?.open();
+      doc?.write(code);
+      doc?.close();
+    }
+  }
+
+  function updateConsoleOutput(result: string) {
+    const output = document.getElementById('console-output');
+    if (output) {
+      output.textContent = result;
+    }
+  }
+
+  // Initialize when the DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeEditor);
+  } else {
+    initializeEditor();
+  }
+</script>

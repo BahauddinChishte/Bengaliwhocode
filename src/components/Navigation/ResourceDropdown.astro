@@ -1,0 +1,29 @@
+---
+interface DropdownItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  items: DropdownItem[];
+}
+
+const { title, items } = Astro.props;
+---
+
+<div class="relative group">
+  <button class="px-3 py-1 rounded-md hover:bg-[#04AA6D] transition-colors duration-200">
+    {title} ▾
+  </button>
+  <div class="absolute hidden group-hover:block w-56 bg-[#272A35] shadow-lg rounded-lg mt-1 py-2 z-50">
+    {items.map(item => (
+      <a 
+        href={item.href} 
+        class="block px-4 py-2 hover:bg-[#04AA6D] transition-colors duration-200"
+      >
+        {item.label}
+      </a>
+    ))}
+  </div>
+</div>

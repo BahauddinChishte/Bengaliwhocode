@@ -1,0 +1,18 @@
+---
+interface Props {
+  code: string;
+  lang: string;
+}
+
+const { code, lang } = Astro.props;
+---
+
+<div class="relative">
+  <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class={`language-${lang}`}>{code}</code></pre>
+  <button
+    class="absolute top-2 right-2 px-2 py-1 text-xs bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
+    onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').textContent)"
+  >
+    Copy
+  </button>
+</div>

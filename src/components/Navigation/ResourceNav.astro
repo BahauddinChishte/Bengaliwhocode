@@ -1,0 +1,73 @@
+---
+const resources = [
+  { label: "HTML", href: "/tutorials/html" },
+  { label: "CSS", href: "/tutorials/css" },
+  { label: "JavaScript", href: "/tutorials/javascript" },
+  { label: "Python", href: "/tutorials/python" },
+  {
+    label: "Frameworks",
+    items: [
+      { label: "React", href: "/frameworks/react" },
+      { label: "Angular", href: "/frameworks/angular" },
+      { label: "Vue.js", href: "/frameworks/vue" },
+      { label: "Next.js", href: "/frameworks/nextjs" }
+    ]
+  },
+  {
+    label: "লার্নিং প্যাথ",
+    items: [
+      { label: "ওয়েব ডেভেলপমেন্ট", href: "/paths/web-development" },
+      { label: "মোবাইল ডেভেলপমেন্ট", href: "/paths/mobile-development" },
+      { label: "ডেটা সায়েন্স", href: "/paths/data-science" }
+    ]
+  },
+  {
+    label: "AI Tools",
+    items: [
+      { label: "ChatGPT", href: "/ai/chatgpt" },
+      { label: "GitHub Copilot", href: "/ai/github-copilot" },
+      { label: "AI Tools", href: "/ai/tools" }
+    ]
+  }
+];
+---
+
+<nav class="hidden md:block border-b border-gray-700">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ul class="flex items-center justify-center h-12 space-x-2">
+      {resources.map(resource => (
+        <li class="relative group">
+          {!resource.items ? (
+            <a
+              href={resource.href}
+              class="px-4 py-1.5 rounded-md hover:bg-[#04AA6D] transition-colors duration-200 inline-block text-sm"
+            >
+              {resource.label}
+            </a>
+          ) : (
+            <>
+              <button class="px-4 py-1.5 rounded-md hover:bg-[#04AA6D] transition-colors duration-200 flex items-center text-sm group">
+                {resource.label}
+                <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="absolute hidden group-hover:block w-56 left-0 mt-1 pt-2 z-50">
+                <div class="bg-[#272A35] rounded-lg shadow-xl border border-gray-700 py-2">
+                  {resource.items.map(item => (
+                    <a
+                      href={item.href}
+                      class="block px-4 py-2 hover:bg-[#04AA6D] transition-colors duration-200 text-sm"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>

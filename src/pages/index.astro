@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/Home/HeroSection.astro';
+import FeaturesSection from '../components/Home/FeaturesSection.astro';
+import CourseCard from '../components/CourseCard.astro';
+
+const courses = [
+  {
+    title: "HTML ফান্ডামেন্টালস",
+    description: "ওয়েব ডেভেলপমেন্টের মূল ভিত্তি HTML শিখুন",
+    icon: "🌐",
+    href: "/tutorials/html"
+  },
+  {
+    title: "পাইথন প্রোগ্রামিং",
+    description: "সহজ সিনট্যাক্স দিয়ে প্রোগ্রামিং শিখুন",
+    icon: "🐍",
+    href: "/tutorials/python"
+  },
+  {
+    title: "জাভাস্ক্রিপ্ট",
+    description: "ইন্টারেক্টিভ ওয়েবসাইট তৈরি করুন",
+    icon: "⚡",
+    href: "/tutorials/javascript"
+  }
+];
+---
+
+<Layout title="Bengali Who Code - বাংলায় প্রোগ্রামিং শিখুন">
+  <HeroSection />
+  <FeaturesSection />
+  
+  <section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">জনপ্রিয় কোর্সসমূহ</h2>
+        <p class="text-xl text-gray-600">আপনার পছন্দের কোর্স বেছে নিন</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {courses.map(course => (
+          <CourseCard {...course} />
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

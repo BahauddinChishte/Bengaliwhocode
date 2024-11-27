@@ -1,0 +1,38 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeBlock from '../../../components/Docs/CodeBlock.astro';
+
+const title = "HTML ভূমিকা - Bengali Who Code";
+---
+
+<DocsLayout title={title} currentPath="/tutorials/html">
+  <h1 class="text-4xl font-bold mb-8">HTML ভূমিকা</h1>
+  
+  <div class="prose prose-lg max-w-none">
+    <p class="lead">
+      HTML হল ওয়েব পেজের মৌলিক building block। এটি আপনার ওয়েব পেজের structure তৈরি করে।
+    </p>
+
+    <h2>HTML কি?</h2>
+    <ul>
+      <li>HTML = Hyper Text Markup Language</li>
+      <li>HTML ওয়েব পেজের structure তৈরি করে</li>
+      <li>HTML elements দিয়ে ওয়েব পেজের বিভিন্ন অংশ তৈরি করা হয়</li>
+    </ul>
+
+    <h2>একটি সাধারণ HTML Document</h2>
+    <CodeBlock
+      code={`<!DOCTYPE html>
+<html>
+<head>
+  <title>আমার প্রথম ওয়েবপেজ</title>
+</head>
+<body>
+  <h1>স্বাগতম!</h1>
+  <p>এটি আমার প্রথম HTML পেজ।</p>
+</body>
+</html>`}
+      lang="html"
+    />
+  </div>
+</DocsLayout>

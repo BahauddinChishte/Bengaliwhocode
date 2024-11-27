@@ -1,0 +1,84 @@
+---
+import MobileMenu from './MobileMenu.astro';
+import AuthButtons from './AuthButtons.astro';
+import ResourceNav from './ResourceNav.astro';
+---
+
+<header class="bg-[#272A35] text-white sticky top-0 z-50">
+  <!-- Top Navigation -->
+  <div class="border-b border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo and Links -->
+        <div class="flex items-center space-x-8">
+          <a href="/" class="flex-shrink-0">
+            <span class="text-2xl font-bold text-[#04AA6D]">BWC</span>
+          </a>
+          
+          <!-- Code Editor Link -->
+          <a 
+            href="https://onecompiler.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hidden md:flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
+          >
+            <span>কোড এডিটর</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+
+          <!-- AI Assistant Link -->
+          <a 
+            href="/assistant"
+            class="hidden md:flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
+          >
+            <span>AI সহায়ক</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3.104c-.734.204-1.415.53-2.02.962m0 0c-2.29 1.637-3.616 4.137-3.616 6.937 0 4.799 4.436 8.773 9.886 8.773s9.886-3.974 9.886-8.773c0-2.8-1.326-5.3-3.616-6.937m0 0c-.605-.432-1.286-.758-2.02-.962M12 6v6m0 0l-3-3m3 3l3-3" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Desktop Auth Buttons -->
+        <div class="hidden md:block">
+          <AuthButtons />
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button 
+            type="button" 
+            class="mobile-menu-button p-2 rounded-md hover:bg-gray-700 focus:outline-none"
+            aria-label="Toggle menu"
+          >
+            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resource Navigation -->
+  <ResourceNav />
+
+  <!-- Mobile Menu -->
+  <MobileMenu />
+</header>
+
+<script>
+  // Toggle mobile menu
+  const mobileMenuButton = document.querySelector('.mobile-menu-button');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  const menuIcon = document.querySelector('.menu-icon');
+  const closeIcon = document.querySelector('.close-icon');
+
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+</script>

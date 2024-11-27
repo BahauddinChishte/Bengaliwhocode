@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ChatWindow } from '../components/Assistant/ChatWindow';
+---
+
+<Layout title="AI সহায়ক - Bengali Who Code">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-3xl font-bold mb-8">AI সহায়ক</h1>
+    
+    <div class="mb-8">
+      <p class="text-lg text-gray-600">
+        আপনার প্রোগ্রামিং সংক্রান্ত যেকোনো প্রশ্ন জিজ্ঞাসা করুন। 
+        আমাদের AI সহায়ক বাংলায় আপনাকে সাহায্য করবে।
+      </p>
+    </div>
+
+    <ChatWindow client:load />
+  </div>
+</Layout>

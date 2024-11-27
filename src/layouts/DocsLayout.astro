@@ -1,0 +1,20 @@
+---
+import Layout from './Layout.astro';
+import DocsSidebar from '../components/Docs/DocsSidebar.astro';
+
+interface Props {
+  title: string;
+  currentPath: string;
+}
+
+const { title, currentPath } = Astro.props;
+---
+
+<Layout title={title}>
+  <div class="flex">
+    <DocsSidebar currentPath={currentPath} />
+    <div class="flex-1 px-4 py-8 md:px-8 max-w-4xl mx-auto">
+      <slot />
+    </div>
+  </div>
+</Layout>

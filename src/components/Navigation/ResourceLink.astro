@@ -1,0 +1,14 @@
+---
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a 
+  href={href} 
+  class="px-3 py-1 rounded-md hover:bg-[#04AA6D] transition-colors duration-200"
+>
+  <slot />
+</a>

@@ -1,0 +1,55 @@
+---
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const isActive = (path: string) => currentPath === path;
+
+const tutorials = {
+  html: [
+    { title: "HTML ভূমিকা", path: "/tutorials/html" },
+    { title: "HTML Elements", path: "/tutorials/html/elements" },
+    { title: "HTML Attributes", path: "/tutorials/html/attributes" },
+  ],
+  python: [
+    { title: "পাইথন ভূমিকা", path: "/tutorials/python" },
+    { title: "Variables & Data Types", path: "/tutorials/python/variables" },
+    { title: "Control Flow", path: "/tutorials/python/control-flow" },
+  ],
+  javascript: [
+    { title: "জাভাস্ক্রিপ্ট ভূমিকা", path: "/tutorials/javascript" },
+    { title: "Variables & Functions", path: "/tutorials/javascript/basics" },
+    { title: "DOM Manipulation", path: "/tutorials/javascript/dom" },
+  ]
+};
+---
+
+<aside class="w-64 bg-white border-r min-h-screen p-4">
+  <nav class="space-y-8">
+    {Object.entries(tutorials).map(([category, items]) => (
+      <div>
+        <h5 class="mb-3 font-semibold text-gray-900 uppercase">
+          {category.toUpperCase()}
+        </h5>
+        <ul class="space-y-2">
+          {items.map(item => (
+            <li>
+              <a
+                href={item.path}
+                class={`block px-3 py-2 text-sm rounded-md ${
+                  isActive(item.path)
+                    ? 'bg-indigo-50 text-indigo-600'
+                    : 'text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                {item.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </nav>
+</aside>

@@ -1,0 +1,40 @@
+---
+const contacts = [
+  {
+    title: "ইমেইল",
+    value: "hello@bengaliwhocode.com",
+    icon: "📧"
+  },
+  {
+    title: "ডিসকোর্ড",
+    value: "bengaliwhocode",
+    icon: "💬"
+  },
+  {
+    title: "গিটহাব",
+    value: "github.com/bengaliwhocode",
+    icon: "🐱"
+  }
+];
+---
+
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">যোগাযোগ করুন</h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        আপনার যেকোনো প্রশ্ন বা পরামর্শের জন্য আমাদের সাথে যোগাযোগ করুন
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+      {contacts.map(contact => (
+        <div class="bg-gray-50 p-6 rounded-xl text-center">
+          <div class="text-4xl mb-4">{contact.icon}</div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">{contact.title}</h3>
+          <p class="text-gray-600">{contact.value}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

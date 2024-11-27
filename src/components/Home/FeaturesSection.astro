@@ -1,0 +1,43 @@
+---
+const features = [
+  {
+    title: "ইন্টারেক্টিভ শিক্ষা",
+    description: "কোড লিখুন, এডিট করুন, এবং রান করুন - সবকিছু রিয়েল-টাইমে",
+    icon: "⚡",
+  },
+  {
+    title: "প্রজেক্ট ভিত্তিক",
+    description: "২০+ রিয়েল ওয়ার্ল্ড প্রজেক্ট তৈরি করে শিখুন",
+    icon: "🚀",
+  },
+  {
+    title: "AI সহায়তা",
+    description: "ChatGPT এবং GitHub Copilot দিয়ে দ্রুত সমাধান পান",
+    icon: "🤖",
+  },
+  {
+    title: "কমিউনিটি সাপোর্ট",
+    description: "৫০০০+ প্রোগ্রামারের কমিউনিটিতে যোগ দিন",
+    icon: "👥",
+  }
+];
+---
+
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">আমাদের বৈশিষ্ট্য</h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">নতুন প্রজন্মের জন্য আধুনিক শিক্ষার প্ল্যাটফর্ম</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {features.map(feature => (
+        <div class="bg-gray-50 p-8 rounded-2xl transform hover:scale-105 transition-all duration-200 shadow hover:shadow-lg border border-gray-100">
+          <div class="text-4xl mb-4">{feature.icon}</div>
+          <h3 class="text-xl font-bold mb-4 text-gray-900">{feature.title}</h3>
+          <p class="text-gray-600">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
